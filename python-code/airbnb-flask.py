@@ -125,6 +125,7 @@ def result():
 
         results = convert_out(borough, neighbourhood, accommodates, bedrooms, room_type)
         out = {"Inputs": inputs, "Results": results}
+        print flask.jsonify(out)
         return flask.jsonify(out)
 
 if __name__ == "__main__":
