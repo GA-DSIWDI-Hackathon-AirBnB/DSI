@@ -93,6 +93,12 @@ def boroughs():
 def room_():
     return flask.jsonify(room_types)
 
+@app.route("/menu_data")
+def menu_data():
+    with open("boroughs_neighborhoods.pkl", "r") as p:
+        out = pickle.load(p)
+    return flask.jsonify(out, room_types)
+
 @app.route("/page")
 def page():
     with open("../airbnb-inputs.html") as f:
