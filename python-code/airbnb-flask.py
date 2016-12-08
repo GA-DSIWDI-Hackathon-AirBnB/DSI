@@ -105,11 +105,12 @@ def page():
         return f.read()
 
 @app.route("/result", methods=["POST", "GET"])
-def result():
+def result(charset='utf-8'):
     """Gets prediction using the HTML form"""
 
     if flask.request.method == "POST":
-        inputs = flask.request.form
+        inputs = flask.request.get_json()
+        print inputs
         borough = inputs["borough"]
         neighbourhood = inputs["neighbourhood"]
         room_type = inputs["room_type"]
@@ -125,6 +126,7 @@ def result():
 
         results = convert_out(borough, neighbourhood, accommodates, bedrooms, room_type)
         out = {"Inputs": inputs, "Results": results}
+        print flask.jsonify(out)
         return flask.jsonify(out)
 
 if __name__ == "__main__":
