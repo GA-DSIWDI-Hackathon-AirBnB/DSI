@@ -111,9 +111,10 @@ def result(charset='utf-8'):
     if flask.request.method == "POST":
         inputs = flask.request.get_json()
         print inputs
-        borough = inputs["borough"]
-        neighbourhood = inputs["neighbourhood"]
-        room_type = inputs["room_type"]
+        borough = str(inputs["borough"])
+        print type(borough)
+        neighbourhood = str(inputs["neighbourhood"])
+        room_type = str(inputs["room_type"])
         accommodates = inputs["accommodates"]
         bedrooms = inputs["bedrooms"]
 
@@ -126,7 +127,6 @@ def result(charset='utf-8'):
 
         results = convert_out(borough, neighbourhood, accommodates, bedrooms, room_type)
         out = {"Inputs": inputs, "Results": results}
-        print flask.jsonify(out)
         return flask.jsonify(out)
 
 if __name__ == "__main__":
